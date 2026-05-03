@@ -143,7 +143,7 @@
         const { data, error } = await dbClient
             .from('inventory')
             .select('*')
-            .order('id', { ascending: false });
+            .order('name', { ascending: true });
 
         if (error) {
             console.error('Error fetching:', error);
