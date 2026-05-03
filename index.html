@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IJBH Inventory Tracker | Cloud Sync</title>
+    <title>IHS Inventory Tracker | Cloud Sync</title>
     <!-- Supabase Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
@@ -127,13 +127,12 @@
 </div>
 
 <script>
-    <script>
     // --- CONFIGURATION ---
-    // 1. Fixed URL: Removed the /rest/v1/ suffix
+    // 1. Corrected URL: Removed the /rest/v1/ suffix
     const SUPABASE_URL = 'https://myfgunkberomghadngax.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im15Zmd1bmtiZXJvbWdoYWRuZ2F4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc4Mzc4ODgsImV4cCI6MjA5MzQxMzg4OH0.uToFFvr-UWiWTqyYLN1yJvZaP28Ap5fx8ElsLBfao5U';
 
-    // 2. Variable Name: Changed 'supabase' to 'dbClient' to prevent naming conflicts
+    // 2. Initialization: Using 'dbClient' to avoid the 'supabase' name conflict
     const dbClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const form = document.getElementById('inventoryForm');
@@ -141,7 +140,6 @@
 
     // Fetch data from Supabase
     async function fetchInventory() {
-        // Changed supabase.from to dbClient.from
         const { data, error } = await dbClient
             .from('inventory')
             .select('*')
@@ -154,7 +152,7 @@
         }
     }
 
-    // Add item to Supabase
+    // Add item to Supabase[cite: 1]
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
@@ -175,7 +173,7 @@
         }
     });
 
-    // Update Quantity in Supabase
+    // Update Quantity in Supabase[cite: 1]
     async function updateQty(id, currentQty, change) {
         const newQty = currentQty + change;
         if (newQty < 0) return;
@@ -189,7 +187,7 @@
         else fetchInventory();
     }
 
-    // Delete item from Supabase
+    // Delete item from Supabase[cite: 1]
     async function deleteItem(id) {
         if(confirm("Are you sure you want to delete this from the database?")) {
             const { error } = await dbClient.from('inventory').delete().eq('id', id);
@@ -234,7 +232,7 @@
         document.getElementById('totalValue').textContent = '$' + totalVal.toFixed(2);
     }
 
-    // Initial load
+    // Initial load[cite: 1]
     fetchInventory();
 </script>
 
